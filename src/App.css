@@ -30,3 +30,10 @@
 .redux__heading{
   width: 240px;
 }
+.add_edit{
+  display: flex;
+  justify-content: space-between;
+}
+.add_edit a{
+padding: 10px;
+}

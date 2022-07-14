@@ -1,6 +1,6 @@
 import { Button, Form, Input, Radio, Select } from "antd";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { UserReords } from "../../appInterface/CrudInterface";
 import {
@@ -15,6 +15,7 @@ interface FormProps {
 }
 
 const AddAndEdit = () => {
+  const navigation = useNavigate();
   const [form] = Form.useForm();
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
@@ -33,9 +34,11 @@ const AddAndEdit = () => {
   const handleSubmit = (values: UserReords) => {
     if (!edit) {
       dispatch(createUserRecord({ ...values, id: Date.now() }));
+      navigation("/");
     } else {
       dispatch(updateUser({ ...values, id: Number(id) }));
       setEdit(false);
+      navigation("/");
     }
   };
   return (
@@ -124,7 +127,7 @@ const AddAndEdit = () => {
               htmlType="submit"
               className="add_edit_button"
             >
-              Add
+              {edit ? "Update" : "Add"}
             </Button>
           </Form.Item>
         </Form>

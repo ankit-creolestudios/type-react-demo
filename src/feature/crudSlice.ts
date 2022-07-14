@@ -52,6 +52,17 @@ export const updateUser = createAsyncThunk<Object, UserReords>(
     }
   }
 );
+export const delUserRecord = createAsyncThunk(
+  "create/removeRecord",
+  async (id: number | string | undefined, thunkApi) => {
+    try {
+      const result = await axios.delete(`http://localhost:5000/users/${id}`);
+      return result.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 const crudSlice = createSlice({
   name: "crud",
   initialState: initialState,
@@ -76,6 +87,28 @@ const crudSlice = createSlice({
       state.userRecord = action.payload;
     });
     builder.addCase(retrieveUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(updateUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    });
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(delUserRecord.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(delUserRecord.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userRecord = action.payload;
+    });
+    builder.addCase(delUserRecord.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
