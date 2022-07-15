@@ -72,5 +72,27 @@
       "person": "male",
       "id": 1657863534679
     }
+  ],
+  "register": [
+    {
+      "userName": "Ankit",
+      "email": "ankitknit15@gmail.com",
+      "password": "@Ankitkn1234",
+      "confirm": "@Ankitkn1234",
+      "phone": "9198734469",
+      "city": "prime1",
+      "person": "male",
+      "id": 1657880613803
+    },
+    {
+      "userName": "Ankit",
+      "email": "qwert@qwert.com",
+      "password": "@Ankitkn1234",
+      "confirm": "@Ankitkn1234",
+      "phone": "9198734469",
+      "city": "prime1",
+      "person": "male",
+      "id": 1657881492547
+    }
   ]
 }

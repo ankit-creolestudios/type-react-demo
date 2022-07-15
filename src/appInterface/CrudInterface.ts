@@ -5,4 +5,6 @@ export interface UserReords {
   phone: string;
   city: string;
   person: string;
+  password?: string;
+  confirm?: string;
 }

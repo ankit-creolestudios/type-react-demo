@@ -51,3 +51,12 @@ padding: 10px;
   justify-content: space-between;
   padding: 20px;
 }
+.register__already{
+  color: #e91d1d;
+  text-align: center;
+  padding: 10px 0;
+
+}
+.register__pure{
+  text-align: center;
+}
