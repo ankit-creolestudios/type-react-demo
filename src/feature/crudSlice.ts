@@ -63,6 +63,32 @@ export const delUserRecord = createAsyncThunk(
     }
   }
 );
+export const searchUser = createAsyncThunk(
+  "create/search",
+  async (query: string, thunkApi) => {
+    try {
+      const result = await axios.get(`http://localhost:5000/users?q=${query}`);
+      return result.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const sortUser = createAsyncThunk(
+  "create/sort",
+  async (query: string, thunkApi) => {
+    try {
+      const result = await axios.get(
+        `http://localhost:5000/users?_sort=${query}&_order=asc`
+      );
+      return result.data.sort((a: object, b: object) =>
+        a > b ? a : b > a ? b : 0
+      );
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 const crudSlice = createSlice({
   name: "crud",
   initialState: initialState,
@@ -109,6 +135,28 @@ const crudSlice = createSlice({
       state.userRecord = action.payload;
     });
     builder.addCase(delUserRecord.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(searchUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(searchUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userRecord = action.payload;
+    });
+    builder.addCase(searchUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(sortUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(sortUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userRecord = action.payload;
+    });
+    builder.addCase(sortUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

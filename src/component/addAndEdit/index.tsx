@@ -1,4 +1,4 @@
-import { Button, Form, Input, Radio, Select } from "antd";
+import { Button, DatePicker, Form, Input, Radio, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/store";
@@ -8,6 +8,7 @@ import {
   retrieveUser,
   updateUser,
 } from "../../feature/crudSlice";
+import moment from "moment";
 interface FormProps {
   userName: string;
   email: string;
@@ -16,6 +17,7 @@ interface FormProps {
 
 const AddAndEdit = () => {
   const navigation = useNavigate();
+  const [inputSearch, setInputSearch] = useState("");
   const [form] = Form.useForm();
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
@@ -36,7 +38,12 @@ const AddAndEdit = () => {
       dispatch(createUserRecord({ ...values, id: Date.now() }));
       navigation("/");
     } else {
-      dispatch(updateUser({ ...values, id: Number(id) }));
+      dispatch(
+        updateUser({
+          ...values,
+          id: Number(id),
+        })
+      );
       setEdit(false);
       navigation("/");
     }
@@ -67,6 +74,10 @@ const AddAndEdit = () => {
                 required: true,
                 message: "Please enter your name",
               },
+              {
+                pattern: new RegExp(/^[a-zA-Z0-9]{2,}$/),
+                message: "User name contain only characters and numbers",
+              },
             ]}
           >
             <Input type={"text"} placeholder="username" />
@@ -95,6 +106,7 @@ const AddAndEdit = () => {
           >
             <Input type={"text"} placeholder="phone" />
           </Form.Item>
+
           <Form.Item
             name={"city"}
             label="City"

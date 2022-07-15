@@ -37,3 +37,17 @@
 .add_edit a{
 padding: 10px;
 }
+.input__search{
+
+  width: 400px;
+  display: flex;
+  align-items: center;
+}
+.input__search__record{
+  display: flex;
+}
+.input__more{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
