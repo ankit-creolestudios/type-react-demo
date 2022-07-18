@@ -60,3 +60,10 @@ padding: 10px;
 .register__pure{
   text-align: center;
 }
+.todo--ist{
+  padding: 10px;
+}
+.todo__ist{
+  display: flex;
+  justify-content: space-between;
+}

@@ -36,14 +36,6 @@
       "userName": "Ankit",
       "email": "ankitknit15@gmail.com",
       "phone": "9198734469",
-      "city": "prime1",
-      "person": "male",
-      "id": 1657861175029
-    },
-    {
-      "userName": "Ankit",
-      "email": "ankitknit15@gmail.com",
-      "phone": "9198734469",
       "city": "prime2",
       "person": "male",
       "id": 1657861385301
@@ -71,6 +63,14 @@
       "city": "prime2",
       "person": "male",
       "id": 1657863534679
+    },
+    {
+      "userName": "qwert",
+      "email": "qwert@qwert.com",
+      "phone": "123",
+      "city": "prime1",
+      "person": "male",
+      "id": 1658119217305
     }
   ],
   "register": [

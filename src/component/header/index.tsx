@@ -30,6 +30,9 @@ const Header = () => {
           <div>
             <Link to="/add-record">Add User</Link>
           </div>
+          <div>
+            <Link to="/todo">Todo</Link>
+          </div>
           {!login ? (
             <div>
               <div>
