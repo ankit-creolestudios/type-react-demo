@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import UserList from "./component/UserList";
@@ -14,8 +14,18 @@ import TodoItem from "./component/TypeGenericList/TodoMobx/Todos/TodoItem";
 import { TodoStore } from "./component/TypeGenericList/TodoMobx/stores/TodoStore";
 import { toJS } from "mobx";
 
+import UserPage from "./component/TypeGenericList/TodoMobx/Users/UserPage";
+import CommentPage from "./component/TypeGenericList/TodoMobx/Users/CommentPage";
+import HomePage from "./component/TypeGenericList/TodoMobx/Users/HomePage";
+import useActions from "./saga/useActions";
+import { useAppSelector } from "./saga/app/store";
+import Posts from "./component/Posts";
+
 function App() {
   return (
+    // <div>
+    //   <Posts />
+    // </div>
     <BrowserRouter>
       <Header />
       <Routes>
@@ -44,6 +54,7 @@ function App() {
           }
         />
         <Route path="/todo" element={<TodoList />} />
+        <Route path="/user-list" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );

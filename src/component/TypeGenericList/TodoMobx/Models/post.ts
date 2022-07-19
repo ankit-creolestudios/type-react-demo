@@ -1,0 +1,24 @@
+import { computed } from "mobx";
+import IPost from "../../../../appInterface/IPost";
+import AppStore from "../stores/AppStore";
+
+export default class Post implements IPost {
+  id: number;
+  userId: number;
+  title: string;
+  body: string;
+
+  constructor(private store: AppStore, post: IPost) {
+    this.id = post.id;
+    this.userId = post.userId;
+    this.title = post.title;
+    this.body = post.body;
+  }
+  @computed get user() {
+    return this.store.user.byId.get(this.userId);
+  }
+
+  @computed get comments() {
+    return this.store.comment.all.filter((it) => it.postId === this.id);
+  }
+}

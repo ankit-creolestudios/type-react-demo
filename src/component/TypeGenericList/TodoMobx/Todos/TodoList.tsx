@@ -3,12 +3,16 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Todos } from "../../../../appInterface/TodosInterface";
 import { ITodo, TodoStore } from "../stores/TodoStore";
 import { useStores } from "../use-store";
 import TodoItem from "./TodoItem";
+import TodoItemsApi from "./TodoItemsApi";
 
 const TodoList = observer(() => {
   const { todoStore } = useStores();
+  const apiTodo: Todos[] | any = toJS(todoStore.getTodo[0]);
+
   const todo = toJS(todoStore);
   const handleSubmit = (values: ITodo) => {
     const newTodo = {
@@ -70,6 +74,28 @@ const TodoList = observer(() => {
       <div>
         <div>
           <div>Todo</div>
+          {todoStore.getTodo?.length === 0 ? (
+            <div>no data available</div>
+          ) : (
+            <div>
+              {apiTodo !== undefined && (
+                <div>
+                  {apiTodo.map((item: Todos) => (
+                    <>
+                      {item.id < 11 && (
+                        <div>
+                          <TodoItemsApi todo={item} />
+                        </div>
+                      )}
+                    </>
+                  ))}
+                </div>
+              )}
+              {/* {toJS(todoStore.getTodo[0])?.map((item) => (
+                <div></div>
+              ))} */}
+            </div>
+          )}
           {todoStore.inCompletedTask.length === 0 ? (
             <div>no todo present</div>
           ) : (
